@@ -21,6 +21,7 @@ const ProductDetail = () => {
             {/* -?.은 옵셔널 체이닝- 상품을 못찾아 undefined일때 오류 대신
               undefined를 돌려준다 */}
             <Link to='/' className="product-detail_back" >← 상품 목록</Link>
+            
             <span className="product-detail_category">{product?.category}</span>
             <h2>{product?.pName}</h2>
             <p className="product-detail_price">{product?.price.toLocaleString()}원</p>

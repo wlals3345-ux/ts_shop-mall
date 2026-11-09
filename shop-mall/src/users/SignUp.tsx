@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { SignUpForm } from "../types/user";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
-
+// 폼 초기화 값
 const initialForm: SignUpForm = {
     username: "",
     password: "",
@@ -10,6 +10,10 @@ const initialForm: SignUpForm = {
     name: "",
     email: ""
 }
+// 유효성 검사 정규식
+const USERNAME_REGEX = /^(?=.*[a-z])(?=.*[0-9])[a-z0-9]{4,12}$/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 
 const SignUp = () => {
     const [form, setForm] = useState<SignUpForm>(initialForm);
@@ -31,11 +35,11 @@ const SignUp = () => {
         e.preventDefault();  //기본 동작 막기
 
         // 유효성 검사
-        if(!username){
-            setError("아이디를 입력하세요");
+        if(!USERNAME_REGEX.test(username)){
+            setError("아이디를 영문 소문자와 숫자 포함한 4~12자로 입력해주세요");
             return;
         }
-        if(!password){
+        if(password.length < 8){ 
             setError("비밀번호를 입력하세요");
             return;
         }
@@ -47,8 +51,8 @@ const SignUp = () => {
             setError("이름을 입력하세요");
             return;
         }
-        if(!email){
-            setError("이메일 입력하세요");
+        if(!EMAIL_REGEX.test(email.trim())){
+            setError("이메일 형식이 올바르지 않습니다");
             return;
         }
 
@@ -120,7 +124,7 @@ const SignUp = () => {
                         name="email"
                         value={email}
                         onChange={handleInputChange}
-                        placeholder="이메일을 입력해주세요"
+                        placeholder="example@app.test"
                     />
                 </div>
                 {error && 

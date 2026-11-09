@@ -8,6 +8,13 @@ const ProductCard = ({product}: {product: Product}) => {
 
     return(
         <div className="product-card"> 
+        <Link to={`/product/${product.id}`}>
+            <img
+                className="product-card_img"
+                src={product.image}
+                alt={product.pName}
+            />
+        </Link>
             <span>{product.category}</span>
             <h3>
               <Link to={`/product/${product.id}`}>{product.pName}</Link>

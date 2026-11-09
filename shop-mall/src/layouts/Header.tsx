@@ -33,7 +33,10 @@ const Header = () => {
                         <button onClick={logout}>로그아웃</button>
                     </>
                 ) : (
-                     <Link to='/signin'>로그인</Link>
+                     <>
+                        <Link to='/signin'>로그인</Link>
+                        <Link to='/signup'>회원가입</Link>
+                    </>
                 )}
             </nav>
         </header>
