@@ -8,7 +8,8 @@ const initialForm: ProductForm = {
     pName: "",
     category: "마우스",
     price: 0,
-    description: ""
+    description: "",
+    image: ""
 }
 
 const AddProduct = () => {
@@ -18,7 +19,7 @@ const AddProduct = () => {
     const navigate = useNavigate();
 
     // 폼에 입력된 데이터 가져오기
-    const { pName, category, price, description } = form;
+    const { pName, category, price, description, image } = form;
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -49,7 +50,8 @@ const AddProduct = () => {
             pName,
             category,
             price: Number(price),  //화면에 입력한 가격은 문자형이므로 숫자형변환
-            description
+            description,
+            image: image || undefined
         });
         alert("상품이 등록되었습니다.");
         navigate('/');  //상품 목록으로 이동

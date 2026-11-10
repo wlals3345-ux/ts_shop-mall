@@ -10,5 +10,4 @@
 3. 운영(Render.com)
     - Static Site(UI)
     - PostgreSql
-    - Web Site(서버)
-    
+    - Web Site(서버): Node

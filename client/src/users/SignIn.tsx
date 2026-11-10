@@ -22,28 +22,31 @@ const SignIn = () => {
         setForm({...form, [name]: value})
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();  //기본 동작 막기
+    // 폼 제출 핸들러
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-        // 유효성 검사
-        if(!username){
-            setError("아이디를 입력하세요");
-            return;
-        }
-        if(!password){
-            setError("비밀번호를 입력하세요");
-            return;
-        }
-
-        // 로그인 함수 호출
-        const success = login({username, password});
-        if(!success){
-            setError("아이디 또는 비밀번호가 일치하지 않습니다.");
-            return;
-        }
-        alert("로그인되었습니다.");
-        navigate('/');
+    // 유효성 검사
+    if(!username.trim()){
+      setError("아이디를 입력해주세요");
+      return;
     }
+    if(!password){
+      setError("비밀번호를 입력해주세요");
+      return;
+    }
+
+    // 로그인 함수 호출 (성공하면 true)
+    // login은 Promise를 돌려주므로 await로 결과를 기다립니다.
+    const success = await login({ username: username.trim(), password });
+    if(!success){
+      setError("아이디 또는 비밀번호가 올바르지 않습니다");
+      return;
+    }
+
+    alert("로그인되었습니다.");
+    navigate('/');  // 상품 목록으로 이동
+  }
 
     return(
         <div className="sign-in">
